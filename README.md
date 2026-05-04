@@ -37,7 +37,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Админка: `http://localhost:8000/admin/`
+Админка: `https://rishattestproject-production.up.railway.app/admin/`
 
 ## Docker
 
@@ -57,4 +57,3 @@ docker compose up --build
 
 1. В админке создайте `Item` (например `price=1000`, `currency=USD`).
 2. Откройте `/item/<id>/` и оплатите тестовой картой `4242 4242 4242 4242` (любая будущая дата/CVC).
-
