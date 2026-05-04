@@ -58,6 +58,18 @@ if railway_public_domain:
 if "https://*.up.railway.app" not in CSRF_TRUSTED_ORIGINS:
     CSRF_TRUSTED_ORIGINS.append("https://*.up.railway.app")
 
+# Auto-trust origins derived from ALLOWED_HOSTS for HTTPS deployments (e.g. Railway/Render).
+for host in ALLOWED_HOSTS:
+    host = host.strip()
+    if not host or host in {"localhost", "127.0.0.1"}:
+        continue
+    if host.startswith("."):
+        candidate = f"https://*{host}"
+    else:
+        candidate = f"https://{host}"
+    if candidate not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(candidate)
+
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 USE_X_FORWARDED_HOST = True
 
